@@ -3,13 +3,16 @@
 #include <sys/time.h>
 // time.hとsys/time.hは別物なので注意！
 
+void pointer(const int * a);
+
 int main(int argc, char *argv[]) {
     /* まず，日時・時刻情報を格納するための変数を宣言 */
     struct timeval myTime;    // time_t構造体を定義．1970年1月1日からの秒数を格納するもの
-
+    
     /* 時刻取得 */
     gettimeofday(&myTime, NULL);    // 現在時刻を取得してmyTimeに格納．通常のtime_t構造体とsuseconds_tに値が代入される
     //time_st = localtime(&myTime.tv_sec);    // time_t構造体を現地時間でのtm構造体に変換
+    /*
     long old_tv_usec = 0;
     long diff_tv_usec = 0;
     for (int i = 0; i < 100000001; i++) {
@@ -41,8 +44,23 @@ int main(int argc, char *argv[]) {
     printf("longサイズ = %ld\n", sizeof(long));
     printf("doubleサイズ = %ld\n", sizeof(double));
     printf("floatサイズ = %ld\n", sizeof(float));
-
-
-
+    */
+    //const void *A;
+    int A = 1;
+    printf("A = %p\n", &A);
+    pointer(&A);
+    printf("A = %d\n", A);
+    /*
+    for(int i = 0; i < 100; i++){
+        int I = 0;
+        printf("&I = %p\n", &I);
+    }
+    */
     return 0;
+}
+
+void pointer(const int * a){
+    int x = 0;
+    a = &x;
+    printf("&x = %p\n", &x);
 }
